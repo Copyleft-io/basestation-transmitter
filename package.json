@@ -1,0 +1,24 @@
+{
+  "name": "basestation-transmitter",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Daemon to push node information to Basestation.",
+  "engines": {
+    "node": "0.12.x"
+  },
+  "main"    : "index.js",
+  "scripts": {"start": "node index.js"},
+  "dependencies": {
+    "coffee-script": "^1.9.3",
+    "cron": "^1.0.9",
+    "firebase": "^2.2.7",
+    "firebase-token-generator": "^2.0.0",
+    "merge": "^1.2.0"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-electron": "^2.0.0",
+    "grunt-electron-installer": "^0.34.0",
+    "load-grunt-tasks": "^3.2.0"
+  }
+}
