@@ -3,7 +3,16 @@ os = require 'os'
 data = false
 
 if os.platform() == 'linux'
-  data = cp.execSync "ps -H | awk '{print $1, $3, $4}'"
-  data = data.toString().split '\n'
+  data = []
+  ps = cp.execSync "ps -Ao pid,fname,%cpu,%mem --sort %cpu,%mem --no-headers | tail -30  | awk '{print $1, $2, $3, $4}'"
+  for row in ps.toString().split '\n'
+    metrics = row.split ' '
+    if metrics[1]?
+      data.push {
+        pid: metrics[0],
+        process: metrics[1],
+        percent_cpu: metrics[2],
+        percent_mem: metrics[3]
+      }
 
 module.exports = data

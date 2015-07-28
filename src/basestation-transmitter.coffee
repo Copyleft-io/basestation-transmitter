@@ -66,5 +66,3 @@ devices.orderByChild('name').equalTo(os.hostname()).once 'value', (snapshot) ->
     console.log '[INFO] Could not find device. Creating a new one'
     ref = devices.push {}
     setInterval save, interval, ref, {}
-
-#TODO: add commands to see what processes are running. eg, if nix run ps aux
