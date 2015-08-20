@@ -1,20 +1,56 @@
 #!/usr/bin/env node
-var daemon = require("daemonize2").setup({
-    main: "index.js",
-    name: "basestation-transmitter",
-    pidfile: "basestation-transmitter.pid"
+var pm2;
+
+pm2 = require('pm2');
+
+pm2.connect(function() {
+	switch (process.argv[2]) {
+		case 'start':
+			pm2.start({
+				script: 'index.js',
+				name: 'basestation-transmitter',
+				exec_mode: 'fork',
+				instances: 1,
+				max_memory_restart: '100M'
+			}, function(err, apps) {
+				if (err != null) {
+					console.log(err.msg);
+				} else {
+					console.log('basestation-transmitter started');
+				}
+				return pm2.disconnect();
+			});
+			break;
+
+		case 'stop':
+			return pm2.stop('basestation-transmitter', function(err, proc) {
+				if (err !== null) {
+					console.log(err.msg);
+				} else {
+					console.log('basestation-transmitter stopped');
+				}
+				return pm2.disconnect();
+			});
+			break;
+
+		case 'status':
+			return pm2.describe('basestation-transmitter', function(err, proc) {
+				var found, i, len, p;
+				for (i = 0, len = proc.length; i < len; i++) {
+					p = proc[i];
+					if (p.name === 'basestation-transmitter' && p.pid !== 0) {
+						found = true;
+						console.log('Transmitter is running. Process ' + p.pid);
+					}
+				}
+				if (!found) {
+					console.log('Transmitter is not running');
+				}
+				return pm2.disconnect();
+			});
+			break;
+
+		default:
+			return console.log('Usage: [start|stop|status]');
+	}
 });
-
-switch (process.argv[2]) {
-
-    case "start":
-        daemon.start();
-        break;
-
-    case "stop":
-        daemon.stop();
-        break;
-
-    default:
-        console.log("Usage: [start|stop]");
-}
