@@ -24,7 +24,7 @@ unless firebase_uri?
 if secret?
   console.info "basestation: Attempting to authenticate using BASESTATION_SECRET"
 
-  tokenGenerator = new FirebaseTokenGenerator process.env.BASESTATION_SECRET
+  tokenGenerator = new FirebaseTokenGenerator secret
   token = tokenGenerator.createToken { "uid": "custom:BASESTATION_SECRET", "BASESTATION_SECRET": true }
   devices.authWithCustomToken token, (error, authData) ->
     if error
