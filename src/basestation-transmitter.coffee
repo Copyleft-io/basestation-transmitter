@@ -2,7 +2,7 @@ os = require 'os'
 Firebase = require 'firebase'
 FirebaseTokenGenerator = require 'firebase-token-generator'
 merge = require 'merge'
-config = require './config.json'
+config = require __dirname+'/config.json'
 fs = require 'fs'
 
 interval = process.env.BASESTATION_INTERVAL or config.BASESTATION_INTERVAL or 5000
@@ -35,7 +35,7 @@ if secret?
 save = (ref, device) ->
 
   ### Include Plugins ###
-  for script in fs.readdirSync('./src/scripts')
+  for script in fs.readdirSync(__dirname+'/scripts')
     data = require "./scripts/#{script}"
     if data?
       device[script.replace('.coffee', '')] = data

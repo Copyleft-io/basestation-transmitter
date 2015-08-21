@@ -1,2 +1,2 @@
 require('coffee-script/register');
-module.exports = require('./src/basestation-transmitter');
+module.exports = require(__dirname+'/src/basestation-transmitter');
