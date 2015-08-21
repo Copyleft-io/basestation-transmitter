@@ -5,7 +5,7 @@ merge = require 'merge'
 config = require './config.json'
 fs = require 'fs'
 
-interval = process.env.BASESTATION_INTERVAL or config.BASESTATION_INTERVAL or 15000
+interval = process.env.BASESTATION_INTERVAL or config.BASESTATION_INTERVAL or 5000
 firebase_uri = process.env.BASESTATION_DEVICES_URI or config.BASESTATION_DEVICES_URI
 secret = process.env.BASESTATION_SECRET or config.BASESTATION_SECRET
 

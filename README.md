@@ -10,7 +10,7 @@ Communicates device specifics directly to Basestation.
 ## Configuration
 Configuration can be done one of two ways; 1: editing the src/config.json file or 2: defining the configs in environment variables. If environment variables are defined, they will take precedence over any defined configuration in the config.json file.
 
-BASESTATION_INTERVAL - How ofen the daemon executes in milliseconds. Defaults to 15000
+BASESTATION_INTERVAL - How ofen the daemon executes in milliseconds. Defaults to 5000
 BASESTATION_DEVICES_URI - URI pointing to your basestation's devices in firebase. Example: `https://basestation.firebaseio.com/devices`
 BASESTATION_SECRET (Optional) -  Secret key to authenticate to firebase. Only necessary if you have authentication configured, which is recommended. See below.
 
