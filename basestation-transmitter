@@ -7,7 +7,7 @@ pm2.connect(function() {
 	switch (process.argv[2]) {
 		case 'start':
 			pm2.start({
-				script: 'index.js',
+				script: __dirname+'/index.js',
 				name: 'basestation-transmitter',
 				exec_mode: 'fork',
 				instances: 1,
