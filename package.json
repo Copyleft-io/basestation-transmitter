@@ -1,7 +1,7 @@
 {
   "name": "basestation-transmitter",
   "description": "Communicates device specifics directly to Basestation.",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": false,
   "contributors": [
     "FellowHobbyist (https://github.com/FellowHobbyist)",
@@ -14,6 +14,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
+  },
+  "bin": {
+    "basestation-transmitter": "./basestation-transmitter"
   },
   "dependencies": {
     "coffee-script": "^1.9.3",
