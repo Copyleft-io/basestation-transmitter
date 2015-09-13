@@ -1,5 +1,5 @@
 {
   "BASESTATION_INTERVAL": 5000,
-  "BASESTATION_DEVICES_URI": "https://basestation-justmiles.firebaseio.com/devices",
+  "BASESTATION_DEVICES_URI": "https://basestation.firebaseio.com/devices",
   "BASESTATION_SECRET": null
 }

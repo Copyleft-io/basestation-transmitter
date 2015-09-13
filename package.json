@@ -1,7 +1,7 @@
 {
   "name": "basestation-transmitter",
   "description": "Communicates device specifics directly to Basestation.",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "private": false,
   "contributors": [
     "FellowHobbyist (https://github.com/FellowHobbyist)",

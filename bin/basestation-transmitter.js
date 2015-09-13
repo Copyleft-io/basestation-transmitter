@@ -7,7 +7,8 @@ var pm2 = require('pm2'),
 	    name: app_name,
 	    exec_mode: 'fork',
 	    instances: 1,
-	    max_memory_restart: '100M'
+	    max_memory_restart: '100M',
+		cwd: __dirname+'/../'
 	};
 
 
@@ -26,10 +27,10 @@ var help = function() {
 	console.log('');
 };
 
-nconf.file({ file: 'src/config.json' });
+nconf.file({ file: __dirname+'/../src/config.json' });
 
 pm2.connect(function() {
-	
+
 	switch (process.argv[2]) {
 		case 'start':
 			return pm2.start(startOptions, function(err) {
@@ -96,7 +97,7 @@ pm2.connect(function() {
 			   } else {
 			   	 console.log(config + ' is not set.');
 			   }
-			  
+
 			}
 			return pm2.disconnect();
 
@@ -104,7 +105,7 @@ pm2.connect(function() {
 			nconf.set(process.argv[3],process.argv[4]);
 			nconf.save();
 			return pm2.disconnect();
-			
+
 		case 'help':
 			help();
 			return pm2.disconnect();
