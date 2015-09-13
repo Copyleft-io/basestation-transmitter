@@ -1,13 +1,12 @@
 {
   "name": "basestation-transmitter",
   "description": "Communicates device specifics directly to Basestation.",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "private": false,
   "contributors": [
     "FellowHobbyist (https://github.com/FellowHobbyist)",
     "justMiles (https://github.com/justmiles)"
   ],
-  "description": "Daemon to push node information to Basestation.",
   "engines": {
     "node": ">=0.12.x"
   },
@@ -16,7 +15,7 @@
     "start": "node index.js"
   },
   "bin": {
-    "basestation-transmitter": "./basestation-transmitter"
+    "basestation-transmitter": "bin/basestation-transmitter.js"
   },
   "dependencies": {
     "coffee-script": "^1.9.3",
@@ -24,7 +23,9 @@
     "firebase": "^2.2.7",
     "firebase-token-generator": "^2.0.0",
     "merge": "^1.2.0",
-    "pm2": "^0.14.7"
+    "nconf": "^0.7.2",
+    "pm2": "^0.14.7",
+    "underscore": "^1.8.3"
   },
   "keywords": [
     "basestation",
