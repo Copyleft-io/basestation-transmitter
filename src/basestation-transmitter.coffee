@@ -5,7 +5,7 @@ fs = require 'fs'
 Device = require './device.coffee'
 
 nconf = require 'nconf'
-nconf.file file: 'src/config.json' 
+nconf.file file: 'config.json'
 
 devices = new Firebase nconf.get('BASESTATION_DEVICES_URI')
 

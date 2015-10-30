@@ -27,7 +27,7 @@ var help = function() {
 	console.log('');
 };
 
-nconf.file({ file: __dirname+'/../src/config.json' });
+nconf.file({ file: __dirname+'/../config.json' });
 
 pm2.connect(function() {
 

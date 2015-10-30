@@ -13,7 +13,5 @@ class Device
 		for element in @omitted_elements
 			delete device[element]
 		@firebase_ref.set device
-		
-		
-		
+
 module.exports = Device
