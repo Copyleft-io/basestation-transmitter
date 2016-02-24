@@ -1,11 +1,9 @@
 cp = require 'child_process'
 os = require 'os'
-merge = require 'merge'
 
-module.exports = (device, interval)->
-	
+module.exports = (device, nconf) ->
 	setInterval (()->
-		
+
 		device.name = os.hostname()
 		device.platform = os.platform()
 		device.release = os.release()
@@ -17,7 +15,7 @@ module.exports = (device, interval)->
 		device.loadavg = os.loadavg()
 		device.cpus = os.cpus()
 		device.network = os.networkInterfaces()
-		  
+
 		device.save()
-  
-	), interval
+
+	), nconf.get 'BASESTATION_INTERVAL'

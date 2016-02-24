@@ -1,8 +1,8 @@
 cp = require 'child_process'
 os = require 'os'
 
-module.exports = (device, interval)->
-	
+module.exports = (device, nconf) ->
+
 	return unless os.platform() == 'linux'
 
 	setInterval (()->
@@ -17,7 +17,7 @@ module.exports = (device, interval)->
 		        percent_cpu: metrics[2],
 		        percent_mem: metrics[3]
 		      }
-		      
+
 		  device.save()
-  
-	), interval
+
+	), nconf.get 'BASESTATION_INTERVAL'

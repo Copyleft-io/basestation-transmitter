@@ -1,8 +1,9 @@
-os = require 'os'
-Firebase = require 'firebase'
-FirebaseTokenGenerator = require 'firebase-token-generator'
-fs = require 'fs'
-Device = require './device.coffee'
+os                      = require 'os'
+Firebase                = require 'firebase'
+FirebaseTokenGenerator  = require 'firebase-token-generator'
+fs                      = require 'fs'
+path                    = require 'path'
+Device                  = require path.resolve 'src', 'lib', 'Device.coffee'
 
 nconf = require 'nconf'
 nconf.file file: 'config.json'
@@ -27,24 +28,23 @@ if nconf.get('BASESTATION_SECRET')?
     else
       return console.info '[INFO] Basestation: Authenticated successfully'
 
-
-
 loadPlugins = (device)->
-	### Include Plugins ###
-	plugins = fs.readdirSync("#{__dirname}/plugins").sort()
-	for file_name, num in plugins
-	  file = "#{__dirname}/plugins/#{file_name}"
-	  console.log "Loading plugin #{num+1} of #{plugins.length}: #{file_name}"
-	  try
-	    script = require file
-	    unless typeof script is 'function'
-	      return console.warning "Expected #{file} to assign a function to module.exports, got #{typeof script}"
-	    script device, nconf.get('BASESTATION_INTERVAL')
-	  catch error
-	    console.error "Unable to load #{file}: #{error.stack}"
-	    process.exit(1)
-	    
-			  
+  ### Include Plugins ###
+  plugins = fs.readdirSync("#{__dirname}/plugins").sort()
+
+  for plugin in nconf.get('plugins')
+    console.log "Loading #{plugin}"
+
+    try
+      script = require path.resolve 'src', 'plugins', plugin
+      unless typeof script is 'function'
+        return console.warning "Expected #{file} to assign a function to module.exports, got #{typeof script} instead"
+      script device, nconf
+
+    catch error
+      console.error "Unable to load #{file}: #{error.stack}"
+      process.exit(1)
+
 devices.orderByChild('name').equalTo(os.hostname()).once 'value', (snapshot) ->
 
   if snapshot.exists()
@@ -52,11 +52,10 @@ devices.orderByChild('name').equalTo(os.hostname()).once 'value', (snapshot) ->
     existing_device = snapshot.val()
     id = Object.keys(snapshot.val())[0]
     device = new Device snapshot.ref().child(id), existing_device[id]
-  
+
   else
     console.log '[INFO] Could not find device. Creating a new one'
     ref = devices.push {}
     device = new Device ref
-    
-  loadPlugins device
 
+  loadPlugins device
